@@ -1,4 +1,4 @@
-name: Add package source using `mono nuget.exe`
+name: Wrong NuGet.Config?
 
 on: [push]
 
@@ -13,9 +13,6 @@ jobs:
         
     - name: Create a nuget.config that uses GitHub Packages
       run: |
-        # Create an empty configuration
-        echo "<configuration />" > ./nuget.config
-
         # Download the latest stable `nuget.exe`
         curl -o nuget.exe https://dist.nuget.org/win-x86-commandline/latest/nuget.exe
 
