@@ -12,6 +12,7 @@ jobs:
       run: dotnet new console
         
     - name: Create a nuget.config that uses GitHub Packages
+      shell: bash
       run: |
         # Create an empty configuration
         echo "<configuration />" > ./nuget.config
