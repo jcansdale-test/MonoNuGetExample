@@ -21,6 +21,9 @@ jobs:
             -Name github -Source https://nuget.pkg.github.com/jcansdale-test/index.json \
             -Username jcansdale-test -Password ${{ secrets.GITHUB_TOKEN }} \
             -StorePasswordInClearText # Must use clear text password when used with .NET Core
+             
+    - name: Add a public package from GitHub Packages
+      run: dotnet add package Octokit.GraphQL --version 0.1.4-packages-preview
 
     - name: Clear the NuGet cache
       run: dotnet nuget locals all --clear
