@@ -26,7 +26,7 @@ jobs:
             -StorePasswordInClearText # Must use clear text password when used with .NET Core
 
     - name: Clear the NuGet cache
-      run: dotnet nuget locals` all --clear
+      run: dotnet nuget locals all --clear
 
     - name: Restore packages
       run: dotnet restore MonoNuGetExample.csproj
