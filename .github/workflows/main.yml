@@ -18,7 +18,7 @@ jobs:
 
         # Add GitHub Packages source
         mono nuget.exe sources Add \
-            -Name github -Source https://nuget.pkg.github.com/jcansdale-test/index.json \
+            -Name github -Source https://nuget.pkg.github.com/jcansdale/index.json \
             -Username jcansdale-test -Password ${{ secrets.GITHUB_TOKEN }} \
             -StorePasswordInClearText # Must use clear text password when used with .NET Core
              
