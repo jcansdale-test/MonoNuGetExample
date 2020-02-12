@@ -1,0 +1,36 @@
+name: Add package source using `mono nuget.exe`
+
+on: [push]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Create a .NET Core application
+      run: dotnet new console
+        
+    - name: Create a nuget.config that uses GitHub Packages
+      run: |
+        # Create an empty configuration
+        echo "<configuration />" > ./nuget.config
+
+        # Download the latest stable `nuget.exe`
+        curl -o nuget.exe https://dist.nuget.org/win-x86-commandline/latest/nuget.exe
+
+        # Add GitHub Packages source
+        mono nuget.exe sources Add \
+            -Name github -Source https://nuget.pkg.github.com/jcansdale-test/index.json \
+            -Username jcansdale-test -Password ${{ secrets.GITHUB_TOKEN }} \
+            -StorePasswordInClearText # Must use clear text password when used with .NET Core
+
+    - name: Clear the NuGet cache
+      run: dotnet nuget locals all --clear
+
+    - name: Restore packages
+      run: dotnet restore MonoNuGetExample.csproj
+
+    - name: Build and run the application
+      run: dotnet run
+      
