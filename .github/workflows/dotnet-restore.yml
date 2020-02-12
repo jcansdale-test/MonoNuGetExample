@@ -1,0 +1,30 @@
+name: CI
+
+on: [push]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Create a .NET Core application
+      run: dotnet new console
+        
+    - name: Create a nuget.config that uses GitHub Packages
+      run: |
+        echo "<configuration />" > ./nuget.config
+        nuget sources Add -ConfigFile nuget.config \
+            -Name github -Source https://nuget.pkg.github.com/jcansdale-test/index.json \
+            -Username jcansdale-test -Password ${{ secrets.GITHUB_TOKEN }} \
+            -StorePasswordInClearText # Must use clear text password when used with .NET Core
+
+    - name: Clear the NuGet cache
+      run: dotnet nuget locals all --clear
+
+    - name: Restore packages
+      run: dotnet restore MonoNuGetExample.csproj
+
+    - name: Build and run the application
+      run: dotnet run
+      
