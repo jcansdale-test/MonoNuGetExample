@@ -19,7 +19,7 @@ jobs:
     - name: Create a .NET Core application
       run: dotnet new console
 
-    - name: Add a public package from GitHub Packages
+    - name: Add a private package from `jcansdale-test`
       run: dotnet add package NetCoreConsole --version 1.0.6
 
     - name: Build and run the application
