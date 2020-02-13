@@ -20,7 +20,7 @@ jobs:
       run: dotnet new console
 
     - name: Add a public package from GitHub Packages
-      run: dotnet add PROJECT package NetCoreConsole --version 1.0.6
+      run: dotnet add package NetCoreConsole --version 1.0.6
 
     - name: Clear the NuGet cache
       run: dotnet nuget locals all --clear
