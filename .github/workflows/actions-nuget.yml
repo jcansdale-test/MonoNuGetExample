@@ -22,11 +22,5 @@ jobs:
     - name: Add a public package from GitHub Packages
       run: dotnet add package NetCoreConsole --version 1.0.6
 
-    - name: Clear the NuGet cache
-      run: dotnet nuget locals all --clear
-
-    - name: Restore packages
-      run: dotnet restore MonoNuGetExample.csproj
-
     - name: Build and run the application
       run: dotnet run
